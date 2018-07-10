@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import About from './views/About.vue'
+import Home from './pages/Home.vue'
+import Quiz from './pages/Quiz.vue'
+import CreateQuiz from './pages/CreateQuiz.vue'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -13,9 +15,15 @@ export default new Router({
       component: Home
     },
     {
-      path: '/about',
-      name: 'about',
-      component: About
+      path: '/quiz-:id',
+      name: 'quiz',
+      component: Quiz,
+      props: true
+    },
+    {
+      path: '/create-quiz', 
+      name: 'createQuiz',
+      component: CreateQuiz
     }
   ]
 })
