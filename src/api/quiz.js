@@ -15,8 +15,9 @@ export class QuizAPI {
     }
 
     // add quiz
-    static addQuiz(title, data) {
-        return axios.post(apiURL + 'api/quiz', {title, data});
+    static addQuiz(t, d) {
+        let args = { title:t, data: d};
+        return axios.post(apiURL + "api/quiz", args);
     }
 }
 

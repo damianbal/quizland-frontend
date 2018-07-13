@@ -29,7 +29,7 @@
         </div>
 
         <div class="mt-3">
-            <button class="btn btn-secondary"><i class="fas fa-plus-circle"></i> Save</button>
+            <button @click="save" class="btn btn-secondary"><i class="fas fa-plus-circle"></i> Save</button>
         </div>
 
     </div>
@@ -37,6 +37,7 @@
 
 <script>
 import QuizQuestionEdit from '@/components/QuizQuestionEdit.vue'
+import { QuizAPI } from '../api/quiz.js'
 
 // Create JSON string for Database
 function createQuizJson(title, questions)
@@ -57,16 +58,18 @@ export default {
         },
         reset() {
             this.questions = [];
-            this.title = "???";
+            this.title = "???jkhjkhjkhjkhjk";
         },
         test() {
             alert(JSON.stringify(this.questions));
         },
         save() {
-            let quizData = createQuizJson(this.questions);
-
-            // post it to server POST 
-
+            QuizAPI.addQuiz(this.title, JSON.stringify(this.questions)).then((v) => {
+                alert('Quiz added: ' + v.data.message);
+                console.log(v.data);
+            }).catch((err) => {
+                alert('Error adding quiz!');
+            });
         }
     },
     data: () => {

@@ -5,8 +5,24 @@
 </template>
 
 <script>
-export default {
+import { QuizAPI } from "../api/quiz.js"
 
+export default {
+    props: ["id"],
+    mounted() {
+        // load it
+    },
+    methods: {
+        selectAnswer(index) {
+            // 
+        }
+    },
+    data: () => {
+        return {
+            actual_question_index: 0,
+            questions: []
+        }
+    }
 }
 </script>
 
