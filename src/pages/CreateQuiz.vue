@@ -4,7 +4,7 @@
             <div class="col-12 p-3">
                 <h3 class="text-primary">Create Quiz</h3>
                 <p class="text-muted">This page lets you create new quiz!</p>
-                <button @click="test">Test</button>
+                <button class="btn btn-sm btn-light" @click="test">See JSON</button>
             </div>
         </div>
 
@@ -25,7 +25,7 @@
         </div>
 
         <div>
-            <QuizQuestionEdit v-for="(question, idx) in questions" :key="idx" :question="question"></QuizQuestionEdit>
+            <QuizQuestionEdit v-for="(question, idx) in questions" :key="idx" :qid="idx" :question="question"></QuizQuestionEdit>
         </div>
 
         <div class="mt-3">

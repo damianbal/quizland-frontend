@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 v-html="title"></h3>
+        <h3 class="text-primary" v-html="title"></h3>
 
         <div v-if="loaded">
             <div v-if="hide_question == false">
@@ -49,11 +49,11 @@ export default {
 
             // Check if answer is correct
             if(correctAnswerIndex == index) {
-                alert('Dobrze!');
+                alert('Good answer!');
                 this.num_correct ++; // increase correct answers
             }
             else {
-                alert('Zle :(');
+                alert('Bad answer!');
             }
 
             // Check if it is last question

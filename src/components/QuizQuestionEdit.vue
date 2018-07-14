@@ -1,7 +1,7 @@
 <template>
-    <div class="bg-light p-3 mb-3">
+    <div style="border-bottom: 1px solid rgba(0,0,0,0.1);" class="bg-light p-3 mb-3">
         <div class="form-group">
-            <label>Question:</label>
+            <label>{{ qid + 1 }}. Question:</label>
             <input class="form-control" v-model="q.question">
         </div>
 
@@ -21,9 +21,21 @@
 
 
         <div> 
-            <div v-for="(answer, idx) in answers" :class="{'bg-success':q.correct_answer_index==idx}" :key="idx">
-                {{ answer }} <button @click="removeAnswer(idx)" class="btn btn-danger btn-sm">Remove</button>
-                 <button @click="markAsCorrect(idx)" class="btn btn-success btn-sm">Correct</button>
+            <div v-for="(answer, idx) in answers" :class="{'bg-success text-white':q.correct_answer_index==idx, 'row':true}" :key="idx">
+              
+                <div class="col-12 col-sm-8">
+                                    {{ idx + 1 }}. {{ answer }}
+
+                </div>
+
+                <div class="col-12 col-sm-4">
+                    <div class="btn-group">
+                                     <button @click="removeAnswer(idx)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Remove</button>
+                 <button @click="markAsCorrect(idx)" class="btn btn-success btn-sm"><i class="fas fa-thumbtack"></i> Correct</button>
+                    </div>
+                </div>
+                
+
             </div> 
         </div>
     </div>
@@ -31,7 +43,7 @@
 
 <script>
 export default {
-    props: ["question"],
+    props: ["question", "qid"],
     mounted() {
         this.questions_title = this.question.question;
         this.answers = this.question.answers;
@@ -43,6 +55,8 @@ export default {
             this.answer = null;
         },
         removeAnswer(id) {
+            if(id == this.q.correct_answer_index) { this.q.correct_answer_index = 0; }
+
             this.answers.splice(id, 1);
         },
         markAsCorrect(id) {

@@ -19,6 +19,10 @@ export class QuizAPI {
         let args = { title:t, data: d};
         return axios.post(apiURL + "api/quiz", args);
     }
+
+    static getForPage(page) {
+        return axios.get(apiURL + "api/quiz/page/" + page);
+    }
 }
 
 export default QuizAPI;

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">QuizLand</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -17,9 +17,17 @@
   </div>
 </nav>
 
-    <div class="container bg-light rounded p-3 mt-3 shadow">
+    <div class="container bg-light rounded p-3 mt-3 shadow-sm">
       <router-view/>
     </div>
+
+    <footer class="container p-3 mt-2 font-weight-light text-muted text-center">
+      <div class="row">
+        <div class="col-12">
+          Developed by DAMIANBAL
+          </div>
+        </div>
+    </footer>
   </div>
 </template>
 

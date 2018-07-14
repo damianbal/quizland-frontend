@@ -2,8 +2,7 @@
     <div>
         <div>{{ activeQuestionIndex + 1 }} of {{ numQuestions }}</div>
 
-            {{ question }}
-
+        <div class="text-muted"> {{ question }} </div>
 
         <button v-for="(answer, idx) in answers" :key="idx"  @click="$emit('selectAnswer', idx)" class="btn btn-block btn-light">{{idx+1}}. {{ answer }}</button>
     </div>
@@ -11,7 +10,7 @@
 
 <script>
 export default {
-    props: ["active-question-index", "question", "num-questions", "answers"]
+    props: ["activeQuestionIndex", "question", "numQuestions", "answers"]
 }
 </script>
 
