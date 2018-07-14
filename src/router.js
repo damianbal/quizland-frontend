@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './pages/Home.vue'
 import Quiz from './pages/Quiz.vue'
 import CreateQuiz from './pages/CreateQuiz.vue'
+import Admin from './pages/Admin.vue'
 
 Vue.use(Router)
 
@@ -24,6 +25,11 @@ export default new Router({
       path: '/create-quiz', 
       name: 'createQuiz',
       component: CreateQuiz
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: Admin
     }
   ]
 })

@@ -17,7 +17,7 @@
   </div>
 </nav>
 
-    <div class="container bg-light rounded p-3 mt-3 shadow-sm">
+    <div class="container border bg-light rounded p-3 mt-3 shadow-sm">
       <router-view/>
     </div>
 

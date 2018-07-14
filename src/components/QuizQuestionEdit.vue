@@ -24,8 +24,7 @@
             <div v-for="(answer, idx) in answers" :class="{'bg-success text-white':q.correct_answer_index==idx, 'row':true}" :key="idx">
               
                 <div class="col-12 col-sm-8">
-                                    {{ idx + 1 }}. {{ answer }}
-
+                        {{ idx + 1 }}. {{ answer }}
                 </div>
 
                 <div class="col-12 col-sm-4">

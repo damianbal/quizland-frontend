@@ -1,5 +1,10 @@
 <template>
     <div>
+        <div v-if="admin" class="p-3">
+            <h3>Administration</h3>
+            <button v-on:click="removeQuiz" class="btn btn-danger">Remove this Quiz</button>
+        </div>
+
         <h3 class="text-primary" v-html="title"></h3>
 
         <div v-if="loaded">
@@ -44,6 +49,20 @@ export default {
                 alert('There is error!');
             });
         },
+        removeQuiz() {
+            QuizAPI.removeQuiz(this.id).then(resp => {
+                if(resp.data.success) {
+                    alert(resp.data.message);
+                }
+                else {
+                    alert(resp.data.message);
+                }
+
+                this.$router.push({name:'home'});
+            }).catch(err => {
+                alert('error');
+            })
+        },
         selectAnswer(index) {
             let correctAnswerIndex = this.activeQuestion.correct_answer_index;
 
@@ -80,7 +99,8 @@ export default {
             questions: [],
             num_correct: 0,
             hide_question: false,
-            loaded: false
+            loaded: false,
+            admin: localStorage.getItem("token")
         }
     },
     computed: {

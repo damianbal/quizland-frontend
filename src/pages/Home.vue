@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 class="text-primary">Quizzes</h3>
+        <h3 class="text-primary">Quizzes (Page #{{page+1}})</h3>
 
         <Pagination :page="page" :maxPage="maxPages" v-on:clickPrevPage="prevPage" v-on:clickNextPage="nextPage"></Pagination>
 
