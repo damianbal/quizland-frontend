@@ -46,7 +46,8 @@ export default {
                 console.log('Loaded: ', this.questions);
                 this.loaded = true;
             }).catch(err => {
-                alert('There is error!');
+                //alert('There is error!');
+                this.$router.push({name:'home'});
             });
         },
         removeQuiz() {

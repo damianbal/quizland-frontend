@@ -1,11 +1,11 @@
 <template>
     <div>
-        <form v-on:submit.prevent="save">
+        <form v-on:submit.prevent="save" @keydown.enter.prevent="true">
             <div class="row">
                 <div class="col-12 p-3">
                     <h3 class="text-primary">Create Quiz</h3>
                     <p class="text-muted">This page lets you create new quiz!</p>
-                    <button class="btn btn-sm btn-light" @click="test">See JSON</button>
+                    <button type="button" class="btn btn-sm btn-light" @click="test">See JSON</button>
                 </div>
             </div>
 
@@ -56,9 +56,39 @@ export default {
             alert(JSON.stringify(this.questions));
         },
         save() {
+            let valid = true;
+
+            this.questions.forEach((q) => {
+                if(q.answers.length <= 1) {
+                    valid = false;
+                    
+                    return;
+                }
+            });
+
+            if(this.questions.length < 2) {
+                valid = false;
+            }
+
+            if(valid == false) {
+                alert(`Please fix your quiz, make sure you have answers for questions and that you have atleast 2 questions for quiz :)`);
+                return;
+            }
+
             QuizAPI.addQuiz(this.title, JSON.stringify(this.questions)).then((v) => {
-                alert('Quiz added: ' + v.data.message);
-                console.log(v.data);
+
+                if(v.data.error == false) {
+                    let qid = v.data.quiz_id;
+
+                    alert('Quiz added: ' + v.data.message)
+                    console.log(v.data);
+
+                    this.$router.push({ name: 'quiz', params: { id: qid } })
+                } else {
+                    alert('Could not add your quiz, sorry!')
+                }
+
+
             }).catch((err) => {
                 alert('Error adding quiz!');
             });

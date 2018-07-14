@@ -2,19 +2,20 @@
     <div style="border-bottom: 1px solid rgba(0,0,0,0.1);" class="bg-light p-3 mb-3">
         <div class="form-group">
             <label>{{ qid + 1 }}. Question:</label>
-            <input class="form-control" v-model="q.question">
+            <input minlength="3" class="form-control" v-model="q.question" required>
         </div>
 
         <div class="row">
             <div class="col-sm-9">
                         <div class="form-group">
          
-            <input placeholder="Answer..." class="form-control" v-model="answer">
+            <!-- dont validate this because after adding it to quiz this will be empty but quiz will be valid ! -->
+            <input v-on:keyup.enter="addAnswer" placeholder="Answer..." class="form-control" v-model="answer">
          
         </div>
             </div>
             <div class="col-sm-3">
-                   <button @click="addAnswer" class="btn btn-block btn-primary">Add Answer</button>
+                   <button type="button" @click="addAnswer" class="btn btn-block btn-primary">Add Answer</button>
             </div>
 
         </div>
@@ -29,8 +30,8 @@
 
                 <div class="col-12 col-sm-4">
                     <div class="btn-group">
-                                     <button @click="removeAnswer(idx)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Remove</button>
-                 <button @click="markAsCorrect(idx)" class="btn btn-success btn-sm"><i class="fas fa-thumbtack"></i> Correct</button>
+                        <button type="button" @click="removeAnswer(idx)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Remove</button>
+                        <button type="button" @click="markAsCorrect(idx)" class="btn btn-success btn-sm"><i class="fas fa-thumbtack"></i> Correct</button>
                     </div>
                 </div>
                 
@@ -50,6 +51,11 @@ export default {
     },
     methods: {
         addAnswer() {
+            if(this.answer.length < 1) {
+                alert("Answer is too short, make it longer!");
+                return;
+            }
+
             this.answers.push(this.answer);
             this.answer = null;
         },
