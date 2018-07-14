@@ -39,15 +39,6 @@
 import QuizQuestionEdit from '@/components/QuizQuestionEdit.vue'
 import { QuizAPI } from '../api/quiz.js'
 
-// Create JSON string for Database
-function createQuizJson(title, questions)
-{
-    let json = {questions:questions};
-    let jsonString = JSON.stringify(json);
-
-    return jsonString;
-}
-
 export default {
     mounted() {
 
