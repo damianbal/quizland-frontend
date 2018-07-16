@@ -10,10 +10,9 @@
 
 <script>
 export default {
-    props: ["qtitle", "qid"]
-}
+  props: ["qtitle", "qid"]
+};
 </script>
 
 <style>
-
 </style>

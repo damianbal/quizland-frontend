@@ -43,43 +43,44 @@
 
 <script>
 export default {
-    props: ["question", "qid"],
-    mounted() {
-        this.questions_title = this.question.question;
-        this.answers = this.question.answers;
-        this.q = this.question;
-    },
-    methods: {
-        addAnswer() {
-            if(this.answer.length < 1) {
-                alert("Answer is too short, make it longer!");
-                return;
-            }
+  props: ["question", "qid"],
+  mounted() {
+    this.questions_title = this.question.question;
+    this.answers = this.question.answers;
+    this.q = this.question;
+  },
+  methods: {
+    addAnswer() {
+      if (this.answer.length < 1) {
+        alert("Answer is too short, make it longer!");
+        return;
+      }
 
-            this.answers.push(this.answer);
-            this.answer = null;
-        },
-        removeAnswer(id) {
-            if(id == this.q.correct_answer_index) { this.q.correct_answer_index = 0; }
-
-            this.answers.splice(id, 1);
-        },
-        markAsCorrect(id) {
-            this.q.correct_answer_index = id;
-        }
+      this.answers.push(this.answer);
+      this.answer = null;
     },
-    data: () => {
-        return {
-            questions_title: "Loading...",
-            answers: [],
-            correct_answer_index: 0,
-            answer: null,
-            q: null
-        }
+    removeAnswer(id) {
+      if (id == this.q.correct_answer_index) {
+        this.q.correct_answer_index = 0;
+      }
+
+      this.answers.splice(id, 1);
+    },
+    markAsCorrect(id) {
+      this.q.correct_answer_index = id;
     }
-}
+  },
+  data: () => {
+    return {
+      questions_title: "Loading...",
+      answers: [],
+      correct_answer_index: 0,
+      answer: null,
+      q: null
+    };
+  }
+};
 </script>
 
 <style>
-
 </style>

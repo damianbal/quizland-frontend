@@ -24,46 +24,43 @@
 </template>
 
 <script>
-import axios from "axios"
-import { apiURL } from "@/api/quiz.js" 
+import axios from "axios";
+import { apiURL } from "@/api/quiz.js";
 
 export default {
+  data: () => {
+    return {
+      signed_in: localStorage.getItem("token"),
+      password: null,
+      success: null
+    };
+  },
 
-    data: () => {
-        return {
-            signed_in: localStorage.getItem("token"),
-            password: null,
-            success: null
-        }
+  methods: {
+    signIn() {
+      axios
+        .post(apiURL + "api/auth", { password: this.password })
+        .then(resp => {
+          let token = resp.data.token;
+          let success = resp.data.success;
+
+          if (success) {
+            localStorage.setItem("token", token);
+            alert("Signed in!");
+          } else {
+            alert("Wrong password!");
+          }
+        })
+        .catch(err => {
+          alert("Could not sign in!");
+        });
     },
-
-    methods: {
-        signIn() {
-            axios.post(apiURL + "api/auth", { password: this.password }).then(resp => {
-
-                let token = resp.data.token;
-                let success = resp.data.success;
-
-                if(success) {
-                    localStorage.setItem("token", token);
-                    alert('Signed in!');
-                }
-                else {
-                    alert('Wrong password!');
-                }
-
-            }).catch(err => {
-                alert('Could not sign in!');
-            });
-        },
-        signOut() {
-            localStorage.removeItem("token");
-        }
+    signOut() {
+      localStorage.removeItem("token");
     }
-
-}
+  }
+};
 </script>
 
 <style>
-
 </style>

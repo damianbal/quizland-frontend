@@ -13,56 +13,55 @@
 </template>
 
 <script>
-import { QuizAPI } from '../api/quiz.js';
-import QuizLink from '@/components/QuizLink';
+import { QuizAPI } from "../api/quiz.js";
+import QuizLink from "@/components/QuizLink";
 import Pagination from "@/components/Pagination";
 
 export default {
-    mounted() { 
-       this.loadPage();
-    },
-    methods: {
-        loadPage() {
-            QuizAPI.getForPage(this.page).then(resp => {
-                // get meta information
-                let meta = resp.data.meta;
+  mounted() {
+    this.loadPage();
+  },
+  methods: {
+    loadPage() {
+      QuizAPI.getForPage(this.page).then(resp => {
+        // get meta information
+        let meta = resp.data.meta;
 
-                // get quizzes for that page
-                let data = resp.data.data;
+        // get quizzes for that page
+        let data = resp.data.data;
 
-                // set meta information
-                this.perPage = meta.perPage;
-                this.maxPages = meta.maxPages;
+        // set meta information
+        this.perPage = meta.perPage;
+        this.maxPages = meta.maxPages;
 
-                // set quizzes
-                this.quizzes = data;
-            });
-        },
-        // load next page
-        nextPage() {
-            this.page ++;
-            this.loadPage();
-        },
-        // load prev page
-        prevPage() {
-            if(this.page >= 0) {
-                this.page--;
-                this.loadPage();
-            }
-        }
+        // set quizzes
+        this.quizzes = data;
+      });
     },
-    data: () => {
-        return {
-            quizzes: [],
-            page: 0,
-            perPage: 0,
-            maxPages: 0
-        }
+    // load next page
+    nextPage() {
+      this.page++;
+      this.loadPage();
     },
-    components: {QuizLink, Pagination}
-}
+    // load prev page
+    prevPage() {
+      if (this.page >= 0) {
+        this.page--;
+        this.loadPage();
+      }
+    }
+  },
+  data: () => {
+    return {
+      quizzes: [],
+      page: 0,
+      perPage: 0,
+      maxPages: 0
+    };
+  },
+  components: { QuizLink, Pagination }
+};
 </script>
 
 <style>
-
 </style>

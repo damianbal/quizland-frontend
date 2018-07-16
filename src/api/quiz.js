@@ -1,7 +1,7 @@
 
 import axios from "axios"
 
-export const apiURL = "http://localhost:9191/"
+export const apiURL = "API_URL_HERE";
 
 export class QuizAPI {
     /**

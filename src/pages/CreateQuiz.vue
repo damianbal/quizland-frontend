@@ -37,73 +37,75 @@
 </template>
 
 <script>
-import QuizQuestionEdit from '@/components/QuizQuestionEdit.vue'
-import { QuizAPI } from '../api/quiz.js'
+import QuizQuestionEdit from "@/components/QuizQuestionEdit.vue";
+import { QuizAPI } from "../api/quiz.js";
 
 export default {
-    mounted() {
-
+  mounted() {},
+  methods: {
+    addQuestion() {
+      this.questions.push({
+        question: "Put question here..",
+        answers: ["Question A", "Question B", "Question C"],
+        correct_answer_index: 0
+      });
     },
-    methods: {
-        addQuestion() {
-            this.questions.push({ question: "Put question here..", answers: ["Question A", "Question B", "Question C"], correct_answer_index: 0 });
-        },
-        reset() {
-            this.questions = [];
-            this.title = "Put question here...";
-        },
-        test() {
-            alert(JSON.stringify(this.questions));
-        },
-        save() {
-            let valid = true;
+    reset() {
+      this.questions = [];
+      this.title = "Put question here...";
+    },
+    test() {
+      alert(JSON.stringify(this.questions));
+    },
+    save() {
+      let valid = true;
 
-            this.questions.forEach((q) => {
-                if(q.answers.length <= 1) {
-                    valid = false;
-                    
-                    return;
-                }
-            });
+      this.questions.forEach(q => {
+        if (q.answers.length <= 1) {
+          valid = false;
 
-            if(this.questions.length < 2) {
-                valid = false;
-            }
-
-            if(valid == false) {
-                alert(`Please fix your quiz, make sure you have answers for questions and that you have atleast 2 questions for quiz :)`);
-                return;
-            }
-
-            QuizAPI.addQuiz(this.title, JSON.stringify(this.questions)).then((v) => {
-
-                if(v.data.error == false) {
-                    let qid = v.data.quiz_id;
-
-                    alert('Quiz added: ' + v.data.message)
-                    console.log(v.data);
-
-                    this.$router.push({ name: 'quiz', params: { id: qid } })
-                } else {
-                    alert('Could not add your quiz, sorry!')
-                }
-
-
-            }).catch((err) => {
-                alert('Error adding quiz!');
-            });
+          return;
         }
-    },
-    data: () => {
-        return {
-            title: "Quiz",
-            questions: []
-        }
-    },
-    components: {QuizQuestionEdit}
-}
+      });
+
+      if (this.questions.length < 2) {
+        valid = false;
+      }
+
+      if (valid == false) {
+        alert(
+          `Please fix your quiz, make sure you have answers for questions and that you have atleast 2 questions for quiz :)`
+        );
+        return;
+      }
+
+      QuizAPI.addQuiz(this.title, JSON.stringify(this.questions))
+        .then(v => {
+          if (v.data.error == false) {
+            let qid = v.data.quiz_id;
+
+            alert("Quiz added: " + v.data.message);
+            console.log(v.data);
+
+            this.$router.push({ name: "quiz", params: { id: qid } });
+          } else {
+            alert("Could not add your quiz, sorry!");
+          }
+        })
+        .catch(err => {
+          alert("Error adding quiz!");
+        });
+    }
+  },
+  data: () => {
+    return {
+      title: "Quiz",
+      questions: []
+    };
+  },
+  components: { QuizQuestionEdit }
+};
 </script>
 
 <style>
-
 </style>

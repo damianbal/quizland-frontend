@@ -10,10 +10,9 @@
 
 <script>
 export default {
-    props: ["activeQuestionIndex", "question", "numQuestions", "answers"]
-}
+  props: ["activeQuestionIndex", "question", "numQuestions", "answers"]
+};
 </script>
 
 <style>
-
 </style>

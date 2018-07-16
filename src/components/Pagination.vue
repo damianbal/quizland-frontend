@@ -14,10 +14,9 @@
 
 <script>
 export default {
-    props: ["page", "maxPage"]
-}
+  props: ["page", "maxPage"]
+};
 </script>
 
 <style>
-
 </style>
